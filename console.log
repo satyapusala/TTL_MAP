@@ -1,0 +1,22 @@
+============================= test session starts =============================
+platform win32 -- Python 3.8.5, pytest-6.2.1, py-1.10.0, pluggy-0.13.1 -- c:\users\spusala\appdata\local\programs\python\python38-32\python.exe
+cachedir: .pytest_cache
+rootdir: D:\work\FrameWork\MAP
+collecting ... collected 3 items
+
+TTL_MAP/tests/ttl_tests.py::test_get_record_before_expiry 2020-12-20 23:40:11 - INFO (logger - log_capture): Tests execution started
+2020-12-20 23:40:11 - DEBUG (ttl_operations - add_record): Record is successfully added to map. key: rec1, Value: rec_val1
+2020-12-20 23:40:11 - DEBUG (ttl_tests - test_get_record_before_expiry): Record accessed successfully
+PASSED
+TTL_MAP/tests/ttl_tests.py::test_get_record_after_expiry 2020-12-20 23:40:11 - DEBUG (ttl_operations - add_record): Record is successfully added to map. key: rec1, Value: rec_val1
+2020-12-20 23:40:14 - DEBUG (ttl_operations - get_record): Record is expired: rec1
+PASSED
+TTL_MAP/tests/ttl_tests.py::test_get_multilple_records 2020-12-20 23:40:14 - DEBUG (ttl_operations - add_record): Record is successfully added to map. key: rec1, Value: rec_val1
+2020-12-20 23:40:14 - DEBUG (ttl_operations - add_record): Record is successfully added to map. key: rec2, Value: rec_val2
+2020-12-20 23:40:14 - DEBUG (ttl_operations - add_record): Record is successfully added to map. key: rec3, Value: rec_val3
+2020-12-20 23:40:14 - DEBUG (ttl_operations - add_record): Record is successfully added to map. key: rec4, Value: rec_val4
+2020-12-20 23:40:17 - DEBUG (ttl_operations - get_record): Record is expired: rec2
+PASSED2020-12-20 23:40:17 - INFO (logger - end_capture): Test execution ended
+
+
+============================== 3 passed in 6.04s ==============================
