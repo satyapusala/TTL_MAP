@@ -35,10 +35,11 @@ def test_get_record_before_expiry(pytest_configure):
     """
     ttl = TtlOperations()
     key = 'rec1'
-    ttl.add_record(key, 'rec_val1', 2)
+    value = 'rec_val1'
+    ttl.add_record(key, value, 2)
     record = ttl.get_record(key)
     log.debug("Record accessed successfully")
-    assert record == ttl.ttl_map[key], "Record accessed successfully"
+    assert record == value, "Record accessed successfully"
 
 
 def test_get_record_after_expiry(pytest_configure):
@@ -72,4 +73,4 @@ def test_get_multilple_records(pytest_configure):
     record2 = ttl.get_record('rec2')
     record3 = ttl.get_record('rec3')
     assert record2 == None, "Record was deleted after expiry"
-    assert record3 == ttl.ttl_map['rec3'], "Record accessed successfully"
+    assert record3 == 'rec_val3', "Record accessed successfully"
