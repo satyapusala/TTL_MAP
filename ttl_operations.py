@@ -19,7 +19,6 @@ class TtlOperations:
     """
     def __init__(self):
         self.ttl_map = dict()
-        self.time_stamp = dict()
 
     def add_record(self, key, value, ttl=None):
         """
@@ -28,8 +27,8 @@ class TtlOperations:
         :param value: Value of the record
         :param ttl: Time to expiry value
         """
-        self.ttl_map[key] = value
-        self.time_stamp[key] = [time.time(), ttl]
+        end_time = int(time.time()) + int(ttl)
+        self.ttl_map[key] = [value, end_time]
         log.debug("Record is successfully added to map. key: %s, Value: %s" % (key, value))
 
     def get_record(self, key):
@@ -38,12 +37,14 @@ class TtlOperations:
         :param key: Key of the record to be accessed
         :return: Record of matching key
         """
-        expiary_time = time.time() - self.time_stamp[key][0]
-        if expiary_time > self.time_stamp[key][1]:
-            del self.ttl_map[key]
-            log.debug("Record is expired: %s", key)
+        if key in self.ttl_map.keys():
+            if time.time() > self.ttl_map[key][1]:
+                del self.ttl_map[key]
+                log.debug("Record is expired: %s", key)
+            else:
+                return self.ttl_map[key][0]
         else:
-            return self.ttl_map[key]
+            log.debug("Invalid key provided")
 
 
 if __name__ == "__main__":
